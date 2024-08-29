@@ -20,6 +20,7 @@ const App: React.FC = () => {
   const [taxPayers, setTaxPayers] = useState<TaxPayer[]>([]);
   const [loading, setLoading] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
+  const [headerImage, setHeaderImage] = useState('');
 
   const lightTheme = createTheme({
     palette: {
@@ -55,6 +56,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     fetchTaxPayers();
+    fetchHeaderImage();
   }, []);
 
   const fetchTaxPayers = async () => {
@@ -65,6 +67,16 @@ const App: React.FC = () => {
     } catch (error) {
       console.error('Error fetching tax payers:', error);
       setLoading(false);
+    }
+  };
+
+  const fetchHeaderImage = async () => {
+    try {
+      const response = await fetch('https://api.unsplash.com/photos/random?query=tax+office&client_id=YOUR_UNSPLASH_ACCESS_KEY');
+      const data = await response.json();
+      setHeaderImage(data.urls.regular);
+    } catch (error) {
+      console.error('Error fetching header image:', error);
     }
   };
 
@@ -94,6 +106,9 @@ const App: React.FC = () => {
       <CssBaseline />
       <Container maxWidth="lg">
         <Box className={`my-8 retro-gradient ${darkMode ? 'dark' : ''}`}>
+          {headerImage && (
+            <img src={headerImage} alt="Tax Office" className="header-image" />
+          )}
           <Box className="flex justify-between items-center mb-4">
             <Typography variant="h3" component="h1" gutterBottom>
               TaxPayer Management System

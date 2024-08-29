@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, Button, Box, Typography, CircularProgress } from '@mui/material';
 import { backend } from 'declarations/backend';
+import SearchIcon from '@mui/icons-material/Search';
 
 type TaxPayer = {
   tid: bigint;
@@ -37,9 +38,12 @@ const TaxPayerSearch: React.FC = () => {
 
   return (
     <Box className="mb-8">
-      <Typography variant="h5" component="h2" gutterBottom>
-        Search TaxPayer
-      </Typography>
+      <Box className="flex items-center mb-4">
+        <SearchIcon fontSize="large" color="primary" />
+        <Typography variant="h5" component="h2" className="ml-2">
+          Search TaxPayer
+        </Typography>
+      </Box>
       <Box className="flex space-x-4 mb-4">
         <TextField
           label="TID"
@@ -53,8 +57,9 @@ const TaxPayerSearch: React.FC = () => {
           color="primary"
           onClick={handleSearch}
           disabled={loading}
+          startIcon={loading ? <CircularProgress size={24} /> : <SearchIcon />}
         >
-          {loading ? <CircularProgress size={24} /> : 'Search'}
+          {loading ? 'Searching...' : 'Search'}
         </Button>
       </Box>
       {error && (

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { TextField, Button, Box } from '@mui/material';
+import { TextField, Button, Box, Typography } from '@mui/material';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 
 type TaxPayerFormData = {
   firstName: string;
@@ -23,6 +24,12 @@ const TaxPayerForm: React.FC<TaxPayerFormProps> = ({ onAddTaxPayer }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Box className="flex flex-col space-y-4">
+        <Box className="flex items-center mb-4">
+          <AssignmentIndIcon fontSize="large" color="primary" />
+          <Typography variant="h5" component="h2" className="ml-2">
+            Add New TaxPayer
+          </Typography>
+        </Box>
         <Controller
           name="firstName"
           control={control}
@@ -67,7 +74,7 @@ const TaxPayerForm: React.FC<TaxPayerFormProps> = ({ onAddTaxPayer }) => {
             />
           )}
         />
-        <Button type="submit" variant="contained" color="primary">
+        <Button type="submit" variant="contained" color="primary" startIcon={<AssignmentIndIcon />}>
           Add TaxPayer
         </Button>
       </Box>

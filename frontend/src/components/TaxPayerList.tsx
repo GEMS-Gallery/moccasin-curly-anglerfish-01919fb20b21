@@ -1,6 +1,7 @@
 import React from 'react';
-import { Typography } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 import DataTable from 'react-data-table-component';
+import ListAltIcon from '@mui/icons-material/ListAlt';
 
 type TaxPayer = {
   tid: bigint;
@@ -38,10 +39,13 @@ const columns = [
 
 const TaxPayerList: React.FC<TaxPayerListProps> = ({ taxPayers }) => {
   return (
-    <div>
-      <Typography variant="h5" component="h2" gutterBottom>
-        TaxPayer Records
-      </Typography>
+    <Box>
+      <Box className="flex items-center mb-4">
+        <ListAltIcon fontSize="large" color="primary" />
+        <Typography variant="h5" component="h2" className="ml-2">
+          TaxPayer Records
+        </Typography>
+      </Box>
       <DataTable
         columns={columns}
         data={taxPayers}
@@ -50,7 +54,7 @@ const TaxPayerList: React.FC<TaxPayerListProps> = ({ taxPayers }) => {
         highlightOnHover
         striped
       />
-    </div>
+    </Box>
   );
 };
 
